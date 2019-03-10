@@ -93,7 +93,7 @@
                                                             x:Name="dateLabel"
                                                             Grid.Row="0"
                                                             Grid.Column="0"
-                                                            Text="dataPlaceholder"
+                                                            Text=""
                                                             />
                                             
                                                          <Label

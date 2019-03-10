@@ -49,6 +49,7 @@ namespace Stock_Market_App
 
         public void PopulatePage()
         {
+            //================================START OF GETTING ABSOLUTE MAX AND MINS ================================
             double min = 999999.99;
             double max = 000000.00;
             double foundMin = 0;
@@ -74,6 +75,9 @@ namespace Stock_Market_App
             lowestLabel.Text = foundMin.ToString();
             highestLabel.Text = foundMax.ToString();
         }
+
+        //================================ END OF GETTING ABSOLUTE MAX AND MINS ================================
+
 
 
     }
