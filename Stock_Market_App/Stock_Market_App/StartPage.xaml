@@ -42,6 +42,7 @@
                             Grid.Column="3"
                             Grid.Row="0"
                             Text="Get Stock"
+                            Clicked="GetStockButton_Clicked"
                             />
                     
                         <Label
@@ -72,12 +73,12 @@
                     
                         </Grid>
                 
-                    <ListView x:Name="historyListView" Grid.Row="1" Grid.Column="0">
+                    <ListView x:Name="historyListView" Grid.Row="1" Grid.Column="0" MinimumHeightRequest="70" HasUnevenRows="true">
                               <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell>
+                                        <ViewCell Height="120">
                                             <ViewCell.View>
-                                                <Grid>
+                                                <Grid Padding="2" Margin="2">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="*"/>
@@ -93,46 +94,53 @@
                                                             x:Name="dateLabel"
                                                             Grid.Row="0"
                                                             Grid.Column="0"
-                                                            Text=""
+                                                            Text="{Binding TimeSeriesDaily}"
+                                                            FontSize="Small"
                                                             />
                                             
                                                          <Label
                                                             Grid.Row="1"
                                                             Grid.Column="0"
                                                             Text="High"
+                                                            FontSize="Small"
                                                          />
                                         
                                                         <Label
                                                             Grid.Row="1"
                                                             Grid.Column="1"
                                                             Text="Low"
+                                                            FontSize="Small"
                                                          />
                                        
                                                         <Label
                                                             Grid.Row="1"
                                                             Grid.Column="2"
                                                             Text="Close"
+                                                            FontSize="Small"
                                                          />
                                         
                                                        <Label
                                                             x:Name="dayHighLabel"
-                                                            Grid.Row="1"
+                                                            Grid.Row="2"
                                                             Grid.Column="0"
                                                             Text="{Binding The2High}"
+                                                            FontSize="Small"
                                                          />
                                         
                                                         <Label
                                                             x:Name="dayLowLabel"
-                                                            Grid.Row="1"
+                                                            Grid.Row="2"
                                                             Grid.Column="1"
                                                             Text="{Binding The3Low}"
+                                                            FontSize="Small"
                                                          />
                                        
                                                         <Label
                                                             x:Name="dayCloseLabel"
-                                                            Grid.Row="1"
+                                                            Grid.Row="2"
                                                             Grid.Column="2"
                                                             Text="{Binding The4Close}"
+                                                            FontSize="Small"
                                                          />
                                         
                                             
