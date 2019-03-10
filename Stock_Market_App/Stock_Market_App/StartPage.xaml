@@ -118,21 +118,21 @@
                                                             x:Name="dayHighLabel"
                                                             Grid.Row="1"
                                                             Grid.Column="0"
-                                                            Text="placeholder1"
+                                                            Text="{Binding The2High}"
                                                          />
                                         
                                                         <Label
                                                             x:Name="dayLowLabel"
                                                             Grid.Row="1"
                                                             Grid.Column="1"
-                                                            Text="placeholder2"
+                                                            Text="{Binding The3Low}"
                                                          />
                                        
                                                         <Label
                                                             x:Name="dayCloseLabel"
                                                             Grid.Row="1"
                                                             Grid.Column="2"
-                                                            Text="placeholder3"
+                                                            Text="{Binding The4Close}"
                                                          />
                                         
                                             

@@ -31,20 +31,27 @@ namespace Stock_Market_App
             string stockApiEndpoint = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY" + "&symbol=" + userInput + "&apikey=" + API_Key;
             Uri stockApiUri = new Uri(stockApiEndpoint);
 
+            //creating a HTTP client variable
             HttpClient client = new HttpClient();
             TimeSeriesDaily stockData = new TimeSeriesDaily();
 
+            //Response holder
             HttpResponseMessage response = await client.GetAsync(stockApiUri);
 
+            //response stream into a string (we wait for the whole reponse to be received)
             string jsonContent = await response.Content.ReadAsStringAsync();
 
+            //Parse into an object accroding to our data model (TimeSeriesDaily)
             stockData = JsonConvert.DeserializeObject<TimeSeriesDaily>(jsonContent);
 
+            //adding the newly received objects into the list.
             days.Add(stockData);
 
+            //setting the list of received data as the source for the listview
             historyListView.ItemsSource = days;
 
-            PopulatePage();
+
+            //PopulatePage();
         }
 
         public void PopulatePage()
