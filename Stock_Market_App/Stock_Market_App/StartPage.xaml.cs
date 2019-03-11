@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Xamarin.Forms;
+
 using StockDataNamespace;
 
 namespace Stock_Market_App
@@ -13,11 +14,10 @@ namespace Stock_Market_App
 
     public partial class StartPage : ContentPage
     {
-        public string API_Key = "7MW8GOBODP71QU9L";
-        public List<StockData> days;
-        public List<TimeSeriesDaily> stockList;
-        double min = 999.00;
-        double max = 000.00;
+        public string API_Key = "7MW8GOBODP71QU9L";  //personal API key
+        public List<TimeSeriesDaily> stockList; //list containing all the objects parsed from the Json string
+        double min = 999.00;    //highest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
+        double max = 000.00;    //Lowest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
 
         public StartPage()
         {
@@ -26,6 +26,7 @@ namespace Stock_Market_App
 
         async void GetStockButton_Clicked(object sender, EventArgs e)
         {
+
             //Getting company's acronym entered by the user in order to be added to the api endpoint
             string userInput;
             userInput = stockEntry.Text;
@@ -52,59 +53,51 @@ namespace Stock_Market_App
             //Setting the list as the source of the ListView
             historyListView.ItemsSource = stockList;
 
-            //Getting other data (30 days High and Low)
-            PopulatePage();
+            //populating the rest of the fields in the page
+            populatePage();
 
         }
 
-
-        public void PopulatePage()
+        void GetHighAndLow()
         {
             //================================START OF GETTING ABSOLUTE MAX AND MINS ===============================
 
-            /*
-            foreach (var stock in stockList)
+            //loop through each element in the list and compare it's lowest and highest prices. 
+            for (int i = 0; i < stockList.Count; i++)
             {
-                Console.WriteLine(stock.The3Low); //debugging
-                Console.WriteLine(double.Parse(stock.The3Low)); //debugging
-                if (double.Parse(stock.The3Low) <= min)
-                {
-                    foundMin = double.Parse(stock.The3Low);
-                }
-
-                Console.WriteLine(stock.The2High); //debugging
-                Console.WriteLine(double.Parse(stock.The2High)); //debugging
-                if (double.Parse(stock.The2High) >= max)
-                {
-                    foundMax = double.Parse(stock.The2High);
-                }
-            }
-
-            */
-
-            for(int i = 0; i<stockList.Count; i++)
-            {
-                if(double.Parse(stockList[i].The2High) >= max)
+                //If highest so far => max = this
+                if (double.Parse(stockList[i].The2High) >= max)
                 {
                     max = double.Parse(stockList[i].The2High);
                 }
 
+                //If lowest so far => min = this
                 if (double.Parse(stockList[i].The3Low) <= min)
                 {
                     min = double.Parse(stockList[i].The3Low);
                 }
             }
 
-
+            //set labels to found high and low prices.
             lowestLabel.Text = min.ToString();
             highestLabel.Text = max.ToString();
+
+            //reset values for next use.
             min = 999.00;
             max = 000.00;
+
+            //================================END OF GETTING ABSOLUTE MAX AND MINS ===============================
+        }
+
+        void populatePage()
+        {
+            //apiCall(); //need to fix the asynchronous methods. Async / Await...
+            GetHighAndLow();
         }
     }
 }
-               
 
-             
-    
+
+
+
 
