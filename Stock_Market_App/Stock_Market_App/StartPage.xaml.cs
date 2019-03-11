@@ -16,10 +16,8 @@ namespace Stock_Market_App
         public string API_Key = "7MW8GOBODP71QU9L";
         public List<StockData> days;
         public List<TimeSeriesDaily> stockList;
-        double min = 999999.99;
-        double max = 000000.00;
-        double foundMin = 0;
-        double foundMax = 0;
+        double min = 999.00;
+        double max = 000.00;
 
         public StartPage()
         {
@@ -38,7 +36,6 @@ namespace Stock_Market_App
 
             //creating a HTTP client variable
             HttpClient client = new HttpClient();
-            //TimeSeriesDaily stockData = new TimeSeriesDaily();
 
             //Response holder
             HttpResponseMessage response = await client.GetAsync(stockApiUri);
@@ -46,14 +43,16 @@ namespace Stock_Market_App
             //response stream into a string (we wait for the whole reponse to be received)
             string jsonContent = await response.Content.ReadAsStringAsync();
 
-            //Parse into an object accroding to our data model (TimeSeriesDaily)
+            //Parse into an object accroding to our data model (StockData)
             var stockData = StockData.FromJson(jsonContent);
 
+            //Convert the dictionary into a list
             stockList = stockData.TimeSeriesDaily.Values.ToList();
 
-
+            //Setting the list as the source of the ListView
             historyListView.ItemsSource = stockList;
 
+            //Getting other data (30 days High and Low)
             PopulatePage();
 
         }
@@ -63,23 +62,44 @@ namespace Stock_Market_App
         {
             //================================START OF GETTING ABSOLUTE MAX AND MINS ===============================
 
+            /*
             foreach (var stock in stockList)
             {
-                // Console.WriteLine(days[i].TimeSeriesDaily.The2high);
-                if(double.Parse(stock.The3Low) < min)
+                Console.WriteLine(stock.The3Low); //debugging
+                Console.WriteLine(double.Parse(stock.The3Low)); //debugging
+                if (double.Parse(stock.The3Low) <= min)
                 {
                     foundMin = double.Parse(stock.The3Low);
                 }
 
-                if(double.Parse(stock.The2High) > max)
+                Console.WriteLine(stock.The2High); //debugging
+                Console.WriteLine(double.Parse(stock.The2High)); //debugging
+                if (double.Parse(stock.The2High) >= max)
                 {
                     foundMax = double.Parse(stock.The2High);
                 }
             }
 
+            */
 
-            lowestLabel.Text = foundMin.ToString();
-            highestLabel.Text = foundMax.ToString();
+            for(int i = 0; i<stockList.Count; i++)
+            {
+                if(double.Parse(stockList[i].The2High) >= max)
+                {
+                    max = double.Parse(stockList[i].The2High);
+                }
+
+                if (double.Parse(stockList[i].The3Low) <= min)
+                {
+                    min = double.Parse(stockList[i].The3Low);
+                }
+            }
+
+
+            lowestLabel.Text = min.ToString();
+            highestLabel.Text = max.ToString();
+            min = 999.00;
+            max = 000.00;
         }
     }
 }
