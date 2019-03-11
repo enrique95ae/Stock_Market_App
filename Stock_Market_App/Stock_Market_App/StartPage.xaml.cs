@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -8,14 +9,17 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 
 using StockDataNamespace;
+using DayModel;
 
 namespace Stock_Market_App
 {
-
     public partial class StartPage : ContentPage
     {
         public string API_Key = "7MW8GOBODP71QU9L";  //personal API key
         public List<TimeSeriesDaily> stockList; //list containing all the objects parsed from the Json string
+        public List<string> datesList;
+        //public Collection<DayData> DaysList { get; set; }
+        DayData aDay = new DayData();
         double min = 999.00;    //highest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
         double max = 000.00;    //Lowest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
 
@@ -49,13 +53,47 @@ namespace Stock_Market_App
 
             //Convert the dictionary into a list
             stockList = stockData.TimeSeriesDaily.Values.ToList();
+            datesList = stockData.TimeSeriesDaily.Keys.ToList();
+
+            List<DayData> DaysList = new List<DayData>();
+
+            for(int i=0; i< stockList.Count; i++)
+            {
+                Console.WriteLine("test1");
+                Console.WriteLine(datesList[i]);
+                Console.WriteLine(stockList[i].The2High);
+                Console.WriteLine(stockList[i].The3Low);
+
+                aDay.date = datesList[i];
+                aDay.high = double.Parse(stockList[i].The2High);
+                aDay.low = double.Parse(stockList[i].The3Low);
+                aDay.close = double.Parse(stockList[i].The4Close);
+
+                Console.WriteLine("test2");
+
+                DaysList.Add(aDay);
+
+                Console.WriteLine("test3");
+
+                Console.WriteLine("test4");
+                Console.WriteLine(DaysList[i].date);
+                Console.WriteLine(DaysList[i].high);
+                Console.WriteLine(DaysList[i].low);
+
+                Console.WriteLine("test5");
+
+                aDay = new DayData();
+
+                Console.WriteLine("test6");
+            }
+
 
             //Setting the list as the source of the ListView
-            historyListView.ItemsSource = stockList;
+            //historyListView.ItemsSource = stockList;
+            historyListView.ItemsSource = DaysList;
 
             //populating the rest of the fields in the page
             populatePage();
-
         }
 
         void GetHighAndLow()
@@ -65,6 +103,8 @@ namespace Stock_Market_App
             //loop through each element in the list and compare it's lowest and highest prices. 
             for (int i = 0; i < stockList.Count; i++)
             {
+                //Console.WriteLine(datesList[i]);
+
                 //If highest so far => max = this
                 if (double.Parse(stockList[i].The2High) >= max)
                 {
@@ -96,8 +136,3 @@ namespace Stock_Market_App
         }
     }
 }
-
-
-
-
-

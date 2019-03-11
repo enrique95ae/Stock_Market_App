@@ -91,10 +91,10 @@
                                                         </Grid.RowDefinitions>
                                         
                                                          <Label
-                                                            x:Name="dateLabel"
+                                                            x:Name="dayDateLabel"
                                                             Grid.Row="0"
                                                             Grid.Column="0"
-                                                            Text="{Binding TimeSeriesDaily}"
+                                                            Text="{Binding date}"
                                                             FontSize="Small"
                                                             />
                                             
@@ -123,7 +123,7 @@
                                                             x:Name="dayHighLabel"
                                                             Grid.Row="2"
                                                             Grid.Column="0"
-                                                            Text="{Binding The2High}"
+                                                            Text="{Binding high}"
                                                             FontSize="Small"
                                                          />
                                         
@@ -131,7 +131,7 @@
                                                             x:Name="dayLowLabel"
                                                             Grid.Row="2"
                                                             Grid.Column="1"
-                                                            Text="{Binding The3Low}"
+                                                            Text="{Binding low}"
                                                             FontSize="Small"
                                                          />
                                        
@@ -139,7 +139,7 @@
                                                             x:Name="dayCloseLabel"
                                                             Grid.Row="2"
                                                             Grid.Column="2"
-                                                            Text="{Binding The4Close}"
+                                                            Text="{Binding close}"
                                                             FontSize="Small"
                                                          />
                                         
