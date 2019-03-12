@@ -70,7 +70,7 @@ namespace Stock_Market_App
 
                 //Console.WriteLine("test2");
 
-               DaysList.Add(aDay);
+                DaysList.Add(aDay);
                 //DaysList
 
                 //Console.WriteLine("test3");
