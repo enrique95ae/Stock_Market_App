@@ -18,8 +18,6 @@ namespace Stock_Market_App
     public partial class StartPage : ContentPage
     {
         public string API_Key = "7MW8GOBODP71QU9L";  //personal API key
-        //public List<TimeSeriesDaily> stockList; //list containing all the objects parsed from the Json string
-        //public List<string> datesList;
         DayData aDay = new DayData();
         double min = 99999.00;    //highest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
         double max = 00000.00;    //Lowest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
@@ -94,6 +92,7 @@ namespace Stock_Market_App
 
             //populating the rest of the fields in the page
             populatePage();
+            GlobalVariables.retreived = true;
         }
 
         void GetHighAndLow()
