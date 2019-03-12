@@ -60,7 +60,6 @@ namespace Stock_Market_App
 
             fillChartList();
             ChartView.Chart = new LineChart { Entries = entries };
-            GlobalVariables.retreived = false;
         }
     }
 }
