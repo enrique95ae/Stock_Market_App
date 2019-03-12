@@ -34,8 +34,8 @@ namespace Stock_Market_App
                         entry = new Entry(temp)
                         {
                             Color = SKColor.Parse("#FF1943"),
-                            Label = GlobalVariables.datesList[i],
-                            ValueLabel = GlobalVariables.datesList[i]
+                            Label = "",
+                            ValueLabel = GlobalVariables.stockList[i].The2High,
                         };
 
                         entries.Add(entry);
