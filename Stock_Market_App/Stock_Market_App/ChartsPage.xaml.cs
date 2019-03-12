@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using StockDataNamespace;
+using DayModel;
 
 namespace Stock_Market_App
 {

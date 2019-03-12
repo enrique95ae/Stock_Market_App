@@ -1,12 +1,18 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using StockDataNamespace;
+using DayModel;
+using System.Collections.Generic;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Stock_Market_App
 {
     public partial class App : Application
     {
+
+
+
         public App()
         {
             InitializeComponent();

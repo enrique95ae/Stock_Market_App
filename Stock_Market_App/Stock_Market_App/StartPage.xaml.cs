@@ -10,17 +10,19 @@ using Xamarin.Forms;
 
 using StockDataNamespace;
 using DayModel;
+using globals;
+
 
 namespace Stock_Market_App
 {
     public partial class StartPage : ContentPage
     {
         public string API_Key = "7MW8GOBODP71QU9L";  //personal API key
-        public List<TimeSeriesDaily> stockList; //list containing all the objects parsed from the Json string
-        public List<string> datesList;
+        //public List<TimeSeriesDaily> stockList; //list containing all the objects parsed from the Json string
+        //public List<string> datesList;
         DayData aDay = new DayData();
-        double min = 999.00;    //highest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
-        double max = 000.00;    //Lowest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
+        double min = 99999.00;    //highest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
+        double max = 00000.00;    //Lowest price holder. Initizlized so it can also be used to compare. It's reset to this value so it cna be reused after the page has been populated.
 
         public StartPage()
         {
@@ -51,26 +53,27 @@ namespace Stock_Market_App
             var stockData = StockData.FromJson(jsonContent);
 
             //Convert the dictionary into a list
-            stockList = stockData.TimeSeriesDaily.Values.ToList();
-            datesList = stockData.TimeSeriesDaily.Keys.ToList();
+            GlobalVariables.stockList = stockData.TimeSeriesDaily.Values.ToList();
+            GlobalVariables.datesList = stockData.TimeSeriesDaily.Keys.ToList();
 
             List<DayData> DaysList = new List<DayData>();
 
-            for(int i=0; i< stockList.Count; i++)
+            for(int i=0; i< GlobalVariables.stockList.Count; i++)
             {
                 //Console.WriteLine("test1");
                 //Console.WriteLine(datesList[i]);
                 //Console.WriteLine(stockList[i].The2High);
                 //Console.WriteLine(stockList[i].The3Low);
 
-                aDay.date = datesList[i];
-                aDay.high = double.Parse(stockList[i].The2High);
-                aDay.low = double.Parse(stockList[i].The3Low);
-                aDay.close = double.Parse(stockList[i].The4Close);
+                aDay.date = GlobalVariables.datesList[i];
+                aDay.high = double.Parse(GlobalVariables.stockList[i].The2High);
+                aDay.low = double.Parse(GlobalVariables.stockList[i].The3Low);
+                aDay.close = double.Parse(GlobalVariables.stockList[i].The4Close);
 
                 //Console.WriteLine("test2");
 
-                DaysList.Add(aDay);
+               DaysList.Add(aDay);
+                //DaysList
 
                 //Console.WriteLine("test3");
 
@@ -98,20 +101,20 @@ namespace Stock_Market_App
             //================================START OF GETTING ABSOLUTE MAX AND MINS ===============================
 
             //loop through each element in the list and compare it's lowest and highest prices. 
-            for (int i = 0; i < stockList.Count; i++)
+            for (int i = 0; i < GlobalVariables.stockList.Count; i++)
             {
                 //Console.WriteLine(datesList[i]);
 
                 //If highest so far => max = this
-                if (double.Parse(stockList[i].The2High) >= max)
+                if (double.Parse(GlobalVariables.stockList[i].The2High) >= max)
                 {
-                    max = double.Parse(stockList[i].The2High);
+                    max = double.Parse(GlobalVariables.stockList[i].The2High);
                 }
 
                 //If lowest so far => min = this
-                if (double.Parse(stockList[i].The3Low) <= min)
+                if (double.Parse(GlobalVariables.stockList[i].The3Low) <= min)
                 {
-                    min = double.Parse(stockList[i].The3Low);
+                    min = double.Parse(GlobalVariables.stockList[i].The3Low);
                 }
             }
 
@@ -120,8 +123,8 @@ namespace Stock_Market_App
             highestLabel.Text = max.ToString();
 
             //reset values for next use.
-            min = 999.00;
-            max = 000.00;
+            min = 99999.00;
+            max = 00000.00;
 
             //================================END OF GETTING ABSOLUTE MAX AND MINS ===============================
         }
@@ -131,5 +134,6 @@ namespace Stock_Market_App
             //apiCall(); //need to fix the asynchronous methods. Async / Await...
             GetHighAndLow();
         }
+
     }
 }

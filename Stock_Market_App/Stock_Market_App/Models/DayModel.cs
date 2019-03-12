@@ -2,14 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
+    using Xamarin.Forms;
+
     using System.Globalization;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
 
     public class DayData
     {
-        public string date;
-        public double high;
-        public double low;
-        public double close;
+        public string date { get; set; }
+        public double high { get; set; }
+        public double low { get; set; }
+        public double close { get; set; }
     }
+
 }
