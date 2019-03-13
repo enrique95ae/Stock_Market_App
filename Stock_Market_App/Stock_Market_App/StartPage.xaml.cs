@@ -49,50 +49,60 @@ namespace Stock_Market_App
 
             //Parse into an object accroding to our data model (StockData)
             var stockData = StockData.FromJson(jsonContent);
+            Console.WriteLine(jsonContent);
 
-            //Convert the dictionary into a list
-            GlobalVariables.stockList = stockData.TimeSeriesDaily.Values.ToList();
-            GlobalVariables.datesList = stockData.TimeSeriesDaily.Keys.ToList();
-
-            List<DayData> DaysList = new List<DayData>();
-
-            for(int i=0; i< GlobalVariables.stockList.Count; i++)
+            if(jsonContent != GlobalVariables.errorString)
             {
-                //Console.WriteLine("test1");
-                //Console.WriteLine(datesList[i]);
-                //Console.WriteLine(stockList[i].The2High);
-                //Console.WriteLine(stockList[i].The3Low);
+                //Convert the dictionary into a list
+                GlobalVariables.stockList = stockData.TimeSeriesDaily.Values.ToList();
+                GlobalVariables.datesList = stockData.TimeSeriesDaily.Keys.ToList();
 
-                aDay.date = GlobalVariables.datesList[i];
-                aDay.high = double.Parse(GlobalVariables.stockList[i].The2High);
-                aDay.low = double.Parse(GlobalVariables.stockList[i].The3Low);
-                aDay.close = double.Parse(GlobalVariables.stockList[i].The4Close);
+                List<DayData> DaysList = new List<DayData>();
 
-                //Console.WriteLine("test2");
+                for (int i = 0; i < GlobalVariables.stockList.Count; i++)
+                {
+                    //Console.WriteLine("test1");
+                    //Console.WriteLine(datesList[i]);
+                    //Console.WriteLine(stockList[i].The2High);
+                    //Console.WriteLine(stockList[i].The3Low);
 
-                DaysList.Add(aDay);
-                //DaysList
+                    aDay.date = GlobalVariables.datesList[i];
+                    aDay.high = double.Parse(GlobalVariables.stockList[i].The2High);
+                    aDay.low = double.Parse(GlobalVariables.stockList[i].The3Low);
+                    aDay.close = double.Parse(GlobalVariables.stockList[i].The4Close);
 
-                //Console.WriteLine("test3");
+                    //Console.WriteLine("test2");
 
-                //Console.WriteLine("test4");
-                //Console.WriteLine(DaysList[i].date);
-                //Console.WriteLine(DaysList[i].high);
-                //Console.WriteLine(DaysList[i].low);
+                    DaysList.Add(aDay);
+                    //DaysList
 
-                //Console.WriteLine("test5");
+                    //Console.WriteLine("test3");
 
-                aDay = new DayData();
+                    //Console.WriteLine("test4");
+                    //Console.WriteLine(DaysList[i].date);
+                    //Console.WriteLine(DaysList[i].high);
+                    //Console.WriteLine(DaysList[i].low);
 
-                //Console.WriteLine("test6");
+                    //Console.WriteLine("test5");
+
+                    aDay = new DayData();
+
+                    //Console.WriteLine("test6");
+                }
+
+                //Setting the list as the source of the ListView
+                historyListView.ItemsSource = DaysList;
+
+                //populating the rest of the fields in the page
+                populatePage();
+                GlobalVariables.retreived = true;
+            }
+            else
+            {
+                DisplayAlert("ERROR", "Invalid Stock Symbol", "OK");
             }
 
-            //Setting the list as the source of the ListView
-            historyListView.ItemsSource = DaysList;
 
-            //populating the rest of the fields in the page
-            populatePage();
-            GlobalVariables.retreived = true;
         }
 
         void GetHighAndLow()

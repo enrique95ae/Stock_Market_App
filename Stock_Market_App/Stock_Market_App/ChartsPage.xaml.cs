@@ -18,8 +18,6 @@ namespace Stock_Market_App
         Entry entry;
         float temp;
 
-
-
         public void fillChartList()
         {
             if(GlobalVariables.retreived == true)
@@ -50,10 +48,9 @@ namespace Stock_Market_App
             InitializeComponent();
             //fillChartList();
             //ChartView.Chart = new LineChart { Entries = entries };
-
         }
 
-        async void GenerateChartButton_Clicked(object sender, EventArgs e)
+        void GenerateChartButton_Clicked(object sender, EventArgs e)
         {
             entries.Clear();
             ChartView.Chart = new LineChart { Entries = entries };

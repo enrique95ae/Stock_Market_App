@@ -9,7 +9,7 @@
     <StackLayout>
         <Label Text="Line Chart:" FontSize="Large" TextColor="Blue" HorizontalTextAlignment="Center"/>
         <Button Text="Generate Chart" Clicked="GenerateChartButton_Clicked"/>
-        <microcharts:ChartView x:Name="ChartView" HeightRequest="150"/>
+        <microcharts:ChartView x:Name="ChartView" HeightRequest="250"/>
         </StackLayout>
     
     
