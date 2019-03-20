@@ -61,14 +61,5 @@ namespace Stock_Market_App
             fillChartList();
             ChartView.Chart = new LineChart { Entries = entries };
         }
-
-        void GenerateChartButton_Clicked(object sender, EventArgs e)
-        {
-            entries.Clear();
-            ChartView.Chart = new LineChart { Entries = entries };
-
-            fillChartList();
-            ChartView.Chart = new LineChart { Entries = entries };
-        }
     }
 }
