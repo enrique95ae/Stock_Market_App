@@ -49,7 +49,7 @@ namespace Stock_Market_App
 
             //Parse into an object accroding to our data model (StockData)
             var stockData = StockData.FromJson(jsonContent);
-            Console.WriteLine(jsonContent);
+            //Console.WriteLine(jsonContent);
 
             if(jsonContent != GlobalVariables.errorString)
             {

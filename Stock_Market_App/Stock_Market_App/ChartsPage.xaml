@@ -4,7 +4,9 @@
              x:Class="Stock_Market_App.ChartsPage"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-    ios:Page.UseSafeArea="true">
+    ios:Page.UseSafeArea="true"
+             Appearing="Handle_Appearing"
+             >
     
     <StackLayout>
         <Label Text="Line Chart:" FontSize="Large" TextColor="Blue" HorizontalTextAlignment="Center"/>

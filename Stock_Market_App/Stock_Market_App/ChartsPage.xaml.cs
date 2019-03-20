@@ -43,11 +43,23 @@ namespace Stock_Market_App
             }
         }
 
+
         public ChartsPage()
         {
             InitializeComponent();
-            //fillChartList();
+
             //ChartView.Chart = new LineChart { Entries = entries };
+            entries.Clear();
+            fillChartList();
+            ChartView.Chart = new LineChart { Entries = entries };
+        }
+
+        void Handle_Appearing(object sender, System.EventArgs e)
+        {
+           // throw new NotImplementedException();
+            entries.Clear();
+            fillChartList();
+            ChartView.Chart = new LineChart { Entries = entries };
         }
 
         void GenerateChartButton_Clicked(object sender, EventArgs e)
